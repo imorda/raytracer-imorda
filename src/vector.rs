@@ -2,7 +2,7 @@ use std::ops::{Add, Index, Mul, Neg, Sub};
 
 use image::Rgb;
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Vec3<T> {
     x: T,
     y: T,
@@ -15,7 +15,7 @@ impl<T> Vec3<T> {
     }
 }
 
-impl<T: Add<Output=T>> Add for Vec3<T> {
+impl<T: Add<Output = T>> Add for Vec3<T> {
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
@@ -27,7 +27,7 @@ impl<T: Add<Output=T>> Add for Vec3<T> {
     }
 }
 
-impl<T: Sub<Output=T>> Sub for Vec3<T> {
+impl<T: Sub<Output = T>> Sub for Vec3<T> {
     type Output = Self;
 
     fn sub(self, other: Self) -> Self {
@@ -39,7 +39,7 @@ impl<T: Sub<Output=T>> Sub for Vec3<T> {
     }
 }
 
-impl<T: Mul<Output=T> + Add<Output=T>> Mul for Vec3<T> {
+impl<T: Mul<Output = T> + Add<Output = T>> Mul for Vec3<T> {
     type Output = T;
 
     fn mul(self, other: Self) -> T {
@@ -47,7 +47,7 @@ impl<T: Mul<Output=T> + Add<Output=T>> Mul for Vec3<T> {
     }
 }
 
-impl<T: Copy + Mul<Output=T>> Mul<T> for Vec3<T> {
+impl<T: Copy + Mul<Output = T>> Mul<T> for Vec3<T> {
     type Output = Self;
 
     fn mul(self, other: T) -> Self {
@@ -65,7 +65,7 @@ pub trait Cross {
     fn cross(&self, other: Self) -> Self::Output;
 }
 
-impl<T: Copy + Mul<Output=T> + Sub<Output=T>> Cross for Vec3<T> {
+impl<T: Copy + Mul<Output = T> + Sub<Output = T>> Cross for Vec3<T> {
     type Output = Self;
 
     fn cross(&self, other: Self) -> Self {
@@ -77,7 +77,7 @@ impl<T: Copy + Mul<Output=T> + Sub<Output=T>> Cross for Vec3<T> {
     }
 }
 
-impl<T: Neg<Output=T>> Neg for Vec3<T> {
+impl<T: Neg<Output = T>> Neg for Vec3<T> {
     type Output = Self;
 
     fn neg(self) -> Self {
@@ -159,12 +159,12 @@ impl Normalize for Vec3<f64> {
     }
 }
 
-impl Into<Rgb<u8>> for Vec3<f64> {
-    fn into(self) -> Rgb<u8> {
+impl From<Vec3<f64>> for Rgb<u8> {
+    fn from(orig: Vec3<f64>) -> Self {
         Rgb::from([
-            (self.x.min(1.) * 255.) as u8,
-            (self.y.min(1.) * 255.) as u8,
-            (self.z.min(1.) * 255.) as u8,
+            (orig.x.min(1.) * 255.) as u8,
+            (orig.y.min(1.) * 255.) as u8,
+            (orig.z.min(1.) * 255.) as u8,
         ])
     }
 }

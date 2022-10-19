@@ -1,7 +1,7 @@
 use crate::material::Material;
-use crate::Normalize;
 use crate::objects::RayIntersect;
 use crate::vector::Vec3;
+use crate::Normalize;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Sphere {

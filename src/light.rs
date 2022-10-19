@@ -1,6 +1,6 @@
-use crate::{intersect_objects, Normalize, Scene, Vec3};
 use crate::objects::RayIntersect;
 use crate::vector::Norm;
+use crate::{intersect_objects, Normalize, Scene, Vec3};
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Point {

@@ -1,7 +1,7 @@
-use raytracer::*;
 use raytracer::material::Material;
 use raytracer::scene::{Cam, Scene};
 use raytracer::vector::Vec3;
+use raytracer::*;
 
 fn main() {
     let ivory = Material {
